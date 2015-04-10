@@ -45,10 +45,12 @@
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">
 			var list = "AhEuhAhEuh AuBoutCEstSatan BandeDEncules CaSentLHuile CeLivreEstUnBestseller CEstGrasCEstGras CEstLaQuenelleDeLaSubversion CEstLEjacFacialeSystematique CEstLeProjetTalmudique CEstPasUneReligion CEstUnEnculeDeAAZ CEstUnMaitreDeLaDialectique CEstUnTrucDePauvre ChoisirMesVetements ComprendreLEmpire DansLeCulDeAAZ DeAAZ Ding DOuCaVientCetteMerde IlAuraitPuFaireCaca IlFautLeSavoir IlsSontTousSousPseudo JAiBaiseTaFemme JAiRecuDesMenacesDeMortDHandicapes JAiUnTailleurAPayer JeNeFonctionneQueCommeCa JeProduisDuConcept JeSuisTresTresBonSurLePlanDuConcept JLAiEntenduFaireProut JMeSensPlusExciteParAdolfHitler LaPudeurHellenoChretienne LaVulgariteSepharade LEcoleOuTAsApprisAMentir LesChambresAAir LesJuifsEtLesFrancsMacons LesMusulmansSontDeDroite Logos MoiJeSuisUnGoyDuNord MoiSTuVeuxEnTantQueBouddhiste PaixASonAme PaPaPaPa Parasite Pbeuuaaheuuh PourEtreAimeeDUnHomme PourTirerLesLarmesDuGoy PoutPoutPout Scud SiJesusChristMeRegarde StrategiePoutinienne TAsComprisCaOuPas TousCesUntermensch TuVeuxPasEtreActricePorno TuVoisCQueJVeuxDire TuVoudraisQueJeTeSuce UneFilleQuiVaReverDeCoucherAvecMoi".split(' ');
+      var sounds = [];
       $(document).ready(function() {
 			$(list).each(function(i, v) {
 				a = $('<audio>').attr('src', 'samples/'+v+'.ogg').attr('volume', '0.5');
 				a.append($('<a>').attr('href', 'samples/'+v+'.ogg').text(v));
+        sounds[i] = a;
         cont = $('<div class="sample">');
         cont.append($('<span>').text(v.replace(/([A-Z])/g, " $1")));
         cont.append(a);
@@ -59,8 +61,17 @@
 					$(this).children('audio')[0].play();
 				});
         cont.appendTo('#sampler');
-			})
+			});
+      $(document).keydown(function(e) {
+        val = e.keyCode - 48;
+        if (val > 0 && val in sounds)
+        {
+          $('audio').each(function(i,v){ this.pause(); this.currentTime=0;});
+          console.log(sounds[val]);
+          sounds[val][0].play();
+        }
       });
+    });
 		</script>
 	</head>
 	<body>
