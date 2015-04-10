@@ -48,8 +48,11 @@
       var sounds = [];
       $(document).ready(function() {
 			$(list).each(function(i, v) {
-				a = $('<audio>').attr('src', 'samples/'+v+'.ogg').attr('volume', '0.5');
-				a.append($('<a>').attr('href', 'samples/'+v+'.ogg').text(v));
+				a = $('<audio>').attr('preload','auto').attr('volume', '0.5');
+        a.append('<source>').attr('src', 'samples/'+v+'.ogg').attr('type', 'audio/ogg');
+        a.append('<source>').attr('src', 'samples/'+v+'.mp3').attr('type', 'audio/mpeg');
+				a.append($('<a>').attr('href', 'samples/'+v+'.ogg').text(v + ' (ogg)'));
+				a.append($('<a>').attr('href', 'samples/'+v+'.mp3').text(v + ' (mp3)'));
         sounds[i] = a;
         cont = $('<div class="sample">');
         cont.append($('<span>').text(v.replace(/([A-Z])/g, " $1")));
