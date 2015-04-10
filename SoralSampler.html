@@ -36,8 +36,8 @@
 			var list = "AhEuhAhEuh AuBoutCEstSatan BandeDEncules CaSentLHuile CeLivreEstUnBestseller CEstGrasCEstGras CEstLaQuenelleDeLaSubversion CEstLEjacFacialeSystematique CEstLeProjetTalmudique CEstPasUneReligion CEstUnEnculeDeAAZ CEstUnMaitreDeLaDialectique CEstUnTrucDePauvre ChoisirMesVetements ComprendreLEmpire DansLeCulDeAAZ DeAAZ Ding DOuCaVientCetteMerde IlAuraitPuFaireCaca IlFautLeSavoir IlsSontTousSousPseudo JAiBaiseTaFemme JAiRecuDesMenacesDeMortDHandicapes JAiUnTailleurAPayer JeNeFonctionneQueCommeCa JeProduisDuConcept JeSuisTresTresBonSurLePlanDuConcept JLAiEntenduFaireProut JMeSensPlusExciteParAdolfHitler LaPudeurHellenoChretienne LaVulgariteSepharade LEcoleOuTAsApprisAMentir LesChambresAAir LesJuifsEtLesFrancsMacons LesMusulmansSontDeDroite Logos MoiJeSuisUnGoyDuNord MoiSTuVeuxEnTantQueBouddhiste PaixASonAme PaPaPaPa Parasite Pbeuuaaheuuh PourEtreAimeeDUnHomme PourTirerLesLarmesDuGoy PoutPoutPout Scud SiJesusChristMeRegarde StrategiePoutinienne TAsComprisCaOuPas TousCesUntermensch TuVeuxPasEtreActricePorno TuVoisCQueJVeuxDire TuVoudraisQueJeTeSuce UneFilleQuiVaReverDeCoucherAvecMoi".split(' ');
       $(document).ready(function() {
 			$(list).each(function(i, v) {
-				a = $('<audio>').attr('src', v+'.ogg').attr('volume', '0.5');
-				a.append($('<a>').attr('href', v+'.ogg').text(v));
+				a = $('<audio>').attr('src', 'samples/'+v+'.ogg').attr('volume', '0.5');
+				a.append($('<a>').attr('href', 'samples/'+v+'.ogg').text(v));
         cont = $('<div class="sample">');
         cont.text(v);
         cont.append(a);
