@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Soral Sampler is back</title>
+		<style type="text/css">
+			body
+			{
+				background: black;
+				color:white;
+			}
+			#sampler
+			{
+				display:flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+        justify-content: space-around;
+        width:100%;
+
+			}
+			
+			.sample {
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        border: 1px solid white;
+        background:white;
+        color:black;
+        line-height:1.5em;
+        height:1.5em;
+			}
+		</style>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript">
+			var list = "AhEuhAhEuh AuBoutCEstSatan BandeDEncules CaSentLHuile CeLivreEstUnBestseller CEstGrasCEstGras CEstLaQuenelleDeLaSubversion CEstLEjacFacialeSystematique CEstLeProjetTalmudique CEstPasUneReligion CEstUnEnculeDeAAZ CEstUnMaitreDeLaDialectique CEstUnTrucDePauvre ChoisirMesVetements ComprendreLEmpire DansLeCulDeAAZ DeAAZ Ding DOuCaVientCetteMerde IlAuraitPuFaireCaca IlFautLeSavoir IlsSontTousSousPseudo JAiBaiseTaFemme JAiRecuDesMenacesDeMortDHandicapes JAiUnTailleurAPayer JeNeFonctionneQueCommeCa JeProduisDuConcept JeSuisTresTresBonSurLePlanDuConcept JLAiEntenduFaireProut JMeSensPlusExciteParAdolfHitler LaPudeurHellenoChretienne LaVulgariteSepharade LEcoleOuTAsApprisAMentir LesChambresAAir LesJuifsEtLesFrancsMacons LesMusulmansSontDeDroite Logos MoiJeSuisUnGoyDuNord MoiSTuVeuxEnTantQueBouddhiste PaixASonAme PaPaPaPa Parasite Pbeuuaaheuuh PourEtreAimeeDUnHomme PourTirerLesLarmesDuGoy PoutPoutPout Scud SiJesusChristMeRegarde StrategiePoutinienne TAsComprisCaOuPas TousCesUntermensch TuVeuxPasEtreActricePorno TuVoisCQueJVeuxDire TuVoudraisQueJeTeSuce UneFilleQuiVaReverDeCoucherAvecMoi".split(' ');
+      $(document).ready(function() {
+			$(list).each(function(i, v) {
+				a = $('<audio>').attr('src', v+'.ogg').attr('volume', '0.5');
+				a.append($('<a>').attr('href', v+'.ogg').text(v));
+        cont = $('<div class="sample">');
+        cont.text(v);
+        cont.append(a);
+				$(cont).click(
+				function(ev)
+				{
+          $('audio').each(function(i,v){ this.pause(); this.currentTime=0;});
+					$(this).children('audio')[0].play();
+				});
+        cont.appendTo('#sampler');
+			})
+      });
+		</script>
+	</head>
+	<body>
+    <h1>Soral Sampler</h1>
+		<div id="sampler">
+		</div>
+	</body>
+</html>
