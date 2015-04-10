@@ -14,22 +14,33 @@
 				display:flex;
 				flex-direction: row;
 				flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: space-between;
         width:100%;
 
 			}
 			
 			.sample {
         border-radius: 10px;
-        padding: 20px;
-        margin-bottom: 10px;
-        margin-right: 10px;
+        padding: 10px;
         border: 1px solid white;
         background:white;
         color:black;
-        line-height:1.5em;
-        height:1.5em;
+        width:18%;
+        text-align:center;
+        margin-bottom: 1rem;
 			}
+
+      .sample:hover
+      {
+        background: rgb(200,200,200);
+        border: 1px solid rgb(30,30,30);
+      }
+      .sample span {
+        display:inline-block;
+        vertical-align:middle;
+        height:100%;
+        line-height:100%;
+      }
 		</style>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">
@@ -39,7 +50,7 @@
 				a = $('<audio>').attr('src', 'samples/'+v+'.ogg').attr('volume', '0.5');
 				a.append($('<a>').attr('href', 'samples/'+v+'.ogg').text(v));
         cont = $('<div class="sample">');
-        cont.text(v);
+        cont.append($('<span>').text(v.replace(/([A-Z])/g, " $1")));
         cont.append(a);
 				$(cont).click(
 				function(ev)
