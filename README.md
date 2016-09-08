@@ -10,3 +10,7 @@ Les samples sont sous licence CC0 et sont disponibles ici: https://archive.org/d
 Ils sont ajoutés au Git.
 
 Dépendances: jQuery.
+
+## MaJ
+
+2016-09-08: better keyboard control support

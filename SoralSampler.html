@@ -3,11 +3,13 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>Soral Sampler is back</title>
+		<link rel="stylesheet" href="ss-proto.css" />
 		<style type="text/css">
 			body
 			{
 				background: black;
 				color:white;
+				font-family: sans-serif;
 			}
 			#sampler
 			{
@@ -25,7 +27,7 @@
         border: 1px solid white;
         background:white;
         color:black;
-        width:22%;
+        max-width:22%;
         text-align:center;
         margin-bottom: 1rem;
 			}
@@ -45,41 +47,64 @@
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript">
 			var list = "AhEuhAhEuh AuBoutCEstSatan BandeDEncules CaSentLHuile CeLivreEstUnBestseller CEstGrasCEstGras CEstLaQuenelleDeLaSubversion CEstLEjacFacialeSystematique CEstLeProjetTalmudique CEstPasUneReligion CEstUnEnculeDeAAZ CEstUnMaitreDeLaDialectique CEstUnTrucDePauvre ChoisirMesVetements ComprendreLEmpire DansLeCulDeAAZ DeAAZ Ding DOuCaVientCetteMerde IlAuraitPuFaireCaca IlFautLeSavoir IlsSontTousSousPseudo JAiBaiseTaFemme JAiRecuDesMenacesDeMortDHandicapes JAiUnTailleurAPayer JeNeFonctionneQueCommeCa JeProduisDuConcept JeSuisTresTresBonSurLePlanDuConcept JLAiEntenduFaireProut JMeSensPlusExciteParAdolfHitler LaPudeurHellenoChretienne LaVulgariteSepharade LEcoleOuTAsApprisAMentir LesChambresAAir LesJuifsEtLesFrancsMacons LesMusulmansSontDeDroite Logos MoiJeSuisUnGoyDuNord MoiSTuVeuxEnTantQueBouddhiste PaixASonAme PaPaPaPa Parasite Pbeuuaaheuuh PourEtreAimeeDUnHomme PourTirerLesLarmesDuGoy PoutPoutPout Scud SiJesusChristMeRegarde StrategiePoutinienne TAsComprisCaOuPas TousCesUntermensch TuVeuxPasEtreActricePorno TuVoisCQueJVeuxDire TuVoudraisQueJeTeSuce UneFilleQuiVaReverDeCoucherAvecMoi".split(' ');
-      var sounds = [];
-      $(document).ready(function() {
+			var alfabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split('');
+	var sounds = [];
+	var doPause = false;
+	$(document).ready(function() {
 			$(list).each(function(i, v) {
 				a = $('<audio>').attr('preload','auto').attr('volume', '0.5');
-        a.append('<source>').attr('src', 'samples/'+v+'.ogg').attr('type', 'audio/ogg');
-        a.append('<source>').attr('src', 'samples/'+v+'.mp3').attr('type', 'audio/mpeg');
+			        a.append('<source>').attr('src', 'samples/'+v+'.ogg').attr('type', 'audio/ogg');
+			        a.append('<source>').attr('src', 'samples/'+v+'.mp3').attr('type', 'audio/mpeg');
 				a.append($('<a>').attr('href', 'samples/'+v+'.ogg').text(v + ' (ogg)'));
 				a.append($('<a>').attr('href', 'samples/'+v+'.mp3').text(v + ' (mp3)'));
-        sounds[i] = a;
-        cont = $('<div class="sample">');
-        cont.append($('<span>').text(v.replace(/([A-Z])/g, " $1")));
-        cont.append(a);
+				sounds[i] = a;
+				cont = $('<div class="sample">');
+				cont.append($('<span>').text("[" + alfabet[i] + "] - " + v.replace(/([A-Z])/g, " $1")));
+				cont.append(a);
 				$(cont).click(
 				function(ev)
 				{
-          $('audio').each(function(i,v){ this.pause(); this.currentTime=0;});
+					if (doPause) {         $('audio').each(function(i,v){ this.pause(); this.currentTime=0;}); }
 					$(this).children('audio')[0].play();
 				});
-        cont.appendTo('#sampler');
+				cont.appendTo('#sampler');
 			});
+	function isNumeric(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+
       $(document).keydown(function(e) {
-        val = e.keyCode - 48;
-        if (val > 0 && val in sounds)
+	console.log(e.which);
+	console.log(e);
+        val = e.keyCode;
+	chr = String.fromCharCode(val);
+	if (!isNumeric(chr) && !e.shiftKey) { val += 32; }
+	chr = String.fromCharCode(val);
+	idx = alfabet.indexOf(chr);
+	console.log("Char pressed: " + chr + " ("+ idx + ")");
+	if (idx != -1 && idx < sounds.length) 
         {
-          $('audio').each(function(i,v){ this.pause(); this.currentTime=0;});
-          console.log(sounds[val]);
-          sounds[val][0].play();
+		if (doPause) { $('audio').each(function(i,v){ this.pause(); this.currentTime=0;}); }
+		sounds[idx][0].play();
         }
       });
     });
+	function initializeMobile()
+	{
+		console.log("Playing all");
+		$('audio').each(function(i,v) {
+			this.play();
+		});
+		console.log("Played all");
+	}
 		</script>
 	</head>
 	<body>
     <h1>Soral Sampler</h1>
+	<a href="#" ontouchstart="initializeMobile()">Je suis sur mobile</a>
 		<div id="sampler">
 		</div>
+
+	<footer>Toi aussi crée ton Soral Sampler à partir des <a href="https://github.com/ChloeTigre/SoralSampler/">sources</a> voire crée du concept, améliore-le !</footer>
 	</body>
 </html>
