@@ -50,6 +50,8 @@
 			var alfabet = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".split('');
 	var sounds = [];
 	var doPause = false;
+    jQuery.noConflict();
+    (function ( $ ) {
 	$(document).ready(function() {
 			$(list).each(function(i, v) {
 				a = $('<audio>').attr('preload','auto').attr('volume', '0.5');
@@ -89,6 +91,7 @@
         }
       });
     });
+    })(jQuery);
 	function initializeMobile()
 	{
 		console.log("Playing all");
